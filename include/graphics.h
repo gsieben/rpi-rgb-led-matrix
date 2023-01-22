@@ -4,6 +4,8 @@
 // Might be useful to consider using Cairo instead and just have an interface
 // between that and the Canvas. Well, this is a quick set of things to get
 // started (and nicely self-contained).
+
+
 #ifndef RPI_GRAPHICS_H
 #define RPI_GRAPHICS_H
 
@@ -120,6 +122,21 @@ int DrawText(Canvas *c, const Font &font, int x, int y,
 // Same without background. Deprecated, use the one above instead.
 int DrawText(Canvas *c, const Font &font, int x, int y, const Color &color,
              const char *utf8_text);
+
+//  GEOGAB Extension
+
+// Calculates witdh of a text, 
+// with given "font" "kerning_offset". This fuction can be used to caculate the
+// offset needed to center a text: 
+// Example (text align center): 
+//      int x_off = (canvas->width() - TextWidth(font, text_buffer, 2)) / 2;
+//      DrawText(rgb_display, font, x_off, y_off, color,NULL, text_buffer, 2);
+// Returns the width of the text in pixels
+
+int TextWidth(const Font& font, const char* utf8_text, int kerning_offset = 0);
+
+//  GEOGAB Extension
+
 
 // Draw text, a standard NUL terminated C-string encoded in UTF-8,
 // with given "font" at "x","y" with "color".

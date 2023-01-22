@@ -95,6 +95,19 @@ int DrawText(Canvas *c, const Font &font,
   return x - start_x;
 }
 
+//  GEOGAB Extension
+int TextWidth(const Font& font, const char* utf8_text, int extra_spacing) {
+    int size = 0;
+    while (*utf8_text) {
+        const uint32_t cp = utf8_next_codepoint(utf8_text);
+        size += font.CharacterWidth(cp);
+        size += extra_spacing;
+    }
+    return size;
+}
+//  GEOGAB Extension
+
+
 // There used to be a symbol without the optional extra_spacing parameter. Let's
 // define this here so that people linking against an old library will still
 // have their code usable. Now: 2017-06-04; can probably be removed in a couple
