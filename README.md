@@ -1,11 +1,11 @@
 GeoGab Extensions
 =================
 
-Funktion zum ermitteln der breite eines Textes hizugefügt
+Function to determine the width of a text added
 ```
-int breite = TextWidth(fonts, text_buffer);
+int width = TextWidth(fonts, text_buffer);
 ```
-Funktion "Union" in Color eingeführt
+Function "Union" introduced in Color
 ```
 Color = {(uint8_t) r, (uint8_t) g, (uint8_t) b}
 or now
