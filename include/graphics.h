@@ -20,10 +20,18 @@ namespace rgb_matrix {
 struct Color {
   Color() : r(0), g(0), b(0) {}
   Color(uint8_t rr, uint8_t gg, uint8_t bb) : r(rr), g(gg), b(bb) {}
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-};
+  Color(uint32_t value) : integer(value) {}
+
+  union {                               // GeoGab: Union Extension
+    uint32_t integer;
+    struct {
+      uint8_t r;
+      uint8_t g;
+      uint8_t b;
+    };
+  };
+
+ };
 
 // Font loading bdf files. If this ever becomes more types, just make virtual
 // base class.
