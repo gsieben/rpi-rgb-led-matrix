@@ -1,3 +1,22 @@
+GeoGab Extensions
+=================
+
+Funktion zum ermitteln der breite eines Textes hizugefügt
+```
+int breite = TextWidth(fonts, text_buffer);
+```
+Funktion "Union" in Color eingeführt
+```
+Color = {(uint8_t) r, (uint8_t) g, (uint8_t) b}
+or now
+Color = (int) colorvalue
+
+
+while e.g.
+colorvalue= 0x000900FF (rgb)=(9,0,255)
+```
+
+
 Controlling RGB LED display with Raspberry Pi GPIO
 ==================================================
 
