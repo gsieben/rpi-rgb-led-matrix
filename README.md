@@ -13,7 +13,7 @@ Color = (int) colorvalue
 
 
 while e.g.
-colorvalue= 0x000900FF (rgb)=(9,0,255)
+Color color = {9,0,255} or now colorvalue= 0x000900FF
 ```
 
 
