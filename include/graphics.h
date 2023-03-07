@@ -18,16 +18,18 @@
 
 namespace rgb_matrix {
 struct Color {
-  Color() : r(0), g(0), b(0) {}
-  Color(uint8_t rr, uint8_t gg, uint8_t bb) : r(rr), g(gg), b(bb) {}
+  // usage: e.g Cyan [R=0,G=255,B=255] -> Color color1={0, 255, 255} or now also Color color2=0x00FFFF
+  Color() { r = 0, g = 0, b = 0, uu = 0; }      // Note: Order must be changed. Thats why we have to use that way of definition
+  Color(uint8_t rr, uint8_t gg, uint8_t bb)  { r=rr, g=gg, b=bb, uu = 0; }
   Color(uint32_t value) : integer(value) {}
 
-  union {                               // GeoGab: Union Extension
-    uint32_t integer;
+  union {                 // GeoGab: Union Extension
+    uint32_t integer;     // 4 Bytes (unsigned integer) value (0x00RRGGBB)
     struct {
-      uint8_t r;
-      uint8_t g;
-      uint8_t b;
+      uint8_t b;          // Blue
+      uint8_t g;          // Green
+      uint8_t r;          // Red
+      uint8_t uu;         // unused upper byte.
     };
   };
 
