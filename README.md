@@ -8,7 +8,9 @@ int width = TextWidth(fonts, text_buffer);
 Function "Union" introduced in Color
 ```
 Color = {(uint8_t) r, (uint8_t) g, (uint8_t) b}
+
 or now
+
 Color = (int) colorvalue
 
 
