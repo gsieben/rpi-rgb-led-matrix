@@ -18,22 +18,12 @@
 
 namespace rgb_matrix {
 struct Color {
-  // usage: e.g Cyan [R=0,G=255,B=255] -> Color color1={0, 255, 255} or now also Color color2=0x00FFFF
-  Color() { r = 0, g = 0, b = 0, uu = 0; }      // Note: Order must be changed. Thats why we have to use that way of definition
-  Color(uint8_t rr, uint8_t gg, uint8_t bb)  { r=rr, g=gg, b=bb, uu = 0; }
-  Color(uint32_t value) : integer(value) {}
-
-  union {                 // GeoGab: Union Extension
-    uint32_t integer;     // 4 Bytes (unsigned integer) value (0x00RRGGBB)
-    struct {
-      uint8_t b;          // Blue
-      uint8_t g;          // Green
-      uint8_t r;          // Red
-      uint8_t uu;         // unused upper byte.
-    };
-  };
-
- };
+  Color() : r(0), g(0), b(0) {}
+  Color(uint8_t rr, uint8_t gg, uint8_t bb) : r(rr), g(gg), b(bb) {}
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
+};
 
 // Font loading bdf files. If this ever becomes more types, just make virtual
 // base class.
@@ -44,6 +34,7 @@ public:
   ~Font();
 
   bool LoadFont(const char *path);
+  bool ReadFont(const char *font_file_as_string);
 
   // Return height of font in pixels. Returns -1 if font has not been loaded.
   int height() const { return font_height_; }
@@ -62,7 +53,7 @@ public:
   // If we don't have it in the font, draws the replacement character "�" if
   // available.
   // Returns how much we advance on the screen, which is the width of the
-  // character or 0 if we didn't draw any chracter.
+  // character or 0 if we didn't draw any character.
   int DrawGlyph(Canvas *c, int x, int y,
                 const Color &color, const Color *background_color,
                 uint32_t unicode_codepoint) const;
@@ -87,6 +78,8 @@ private:
 
   const Glyph *FindGlyph(uint32_t codepoint) const;
 
+  void parseLine(const char* buffer, Glyph* &current_glyph, uint32_t &codepoint, Glyph &tmp, int &row);
+
   int font_height_;
   int base_line_;
   CodepointGlyphMap glyphs_;
@@ -94,7 +87,7 @@ private:
 
 // -- Some utility functions.
 
-// Utility function: set an image from the given buffer containting pixels.
+// Utility function: set an image from the given buffer containing pixels.
 //
 // Draw image of size "image_width" and "image_height" from pixel at
 // canvas-offset "canvas_offset_x", "canvas_offset_y". Image will be shown
