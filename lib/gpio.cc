@@ -482,10 +482,10 @@ bool Timers::Init() {
   WriteTo("/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor",
           "performance");
 
-  if (GetPiModel() != PI_MODEL_1 && !HasIsolCPUs()) {
-    fprintf(stderr, "Suggestion: to slightly improve display update, add\n\tisolcpus=3\n"
-            "at the end of /boot/cmdline.txt and reboot (see README.md)\n");
-  }
+  //if (GetPiModel() != PI_MODEL_1 && !HasIsolCPUs()) {
+  // fprintf(stderr, "Suggestion: to slightly improve display update, add\n\tisolcpus=3\n"
+  //         "at the end of /boot/cmdline.txt and reboot (see README.md)\n");
+  //}
   return true;
 }
 
